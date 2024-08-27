@@ -1,5 +1,14 @@
 <?php include "partials/head.php"; ?>
 <?php include "partials/nav.php"; ?>
+<?php
+
+    include "options/database.php";
+
+    $brandsQuery = $connection->prepare("select * from brands");
+    $brandsQuery->execute();
+    $brands = $brandsQuery->fetchAll(PDO::FETCH_ASSOC);
+    $totalBrands = $brandsQuery->rowCount();
+?>
 
 <div class="row py-5">
     <div class="col-3 mx-auto">
@@ -10,7 +19,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="addBrand.php" method="post" class="row gy-2 gx-3 align-items-center justify-content-center">
+                    <form action="../functions/addBrand.php" method="post" class="row gy-2 gx-3 align-items-center justify-content-center">
                         <div class="col-auto">
                             <input type="text" class="form-control" name="brandName" id="brandName" placeholder="Brand Name...">
                         </div>
@@ -27,20 +36,35 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                            </tr>
+                            <?php
+                                foreach ($brands as $brand) {
+                                    ?>
+                                    <tr>
+                                        <th scope="row"><?= $brand['id']; ?></th>
+                                        <td><?= $brand['name']; ?></td>
+                                        <td>
+                                            <form action="../functions/editBrand.php?eid=<?= $brand['id'] ?>" method="post">
+                                                <div class="container text-center">
+                                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                                                    <a href="../functions/deleteBrand.php?did=<?= $brand['id'] ?>" class="btn btn-sm btn-danger">Delete</a>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="card-footer">
-                    <span>Total Brands: </span>
+                    <span>Total Brands: <?= $totalBrands; ?></span>
                 </div>
             </div>
         </div>
