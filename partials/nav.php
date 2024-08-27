@@ -19,6 +19,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/brands.php">Brands</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/categories.php">Categories</a>
+        </li>
       </ul>
 
       <form class="d-flex" role="search">
