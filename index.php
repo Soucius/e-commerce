@@ -1,6 +1,10 @@
 <?php include "partials/head.php"; ?>
 <?php include "partials/nav.php"; ?>
 
-<h1>continue products</h1>
+<ol>
+    <li>product update</li>
+    <li>product delete</li>
+    <li>products filter</li>
+</ol>
 
 <?php include "partials/footer.php"; ?>

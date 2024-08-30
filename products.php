@@ -12,78 +12,53 @@
 <div class="container-fluid">
     <div class="row mt-5">
         <div class="col-3 border-end">
-            <div class="container mx-3">
-                <h2 class="text-center">Filters</h2>
-    
-                <hr class="w-50 mx-auto">
-            </div>
-    
-            <div class="container px-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Filter by Brands</h4>
-                    </div>
-    
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="brandCheck" id="brandCheck">
-                                <label class="form-check-label" for="brandCheck">Default checkbox</label>
-                            </div>
-                        </ul>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span>Selected: </span>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="container px-3 pt-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Filter by Category</h4>
-                    </div>
-    
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="categoryCheck" id="categoryCheck">
-                                <label class="form-check-label" for="categoryCheck">
-                                    Default checkbox
-                                </label>
-                            </div>
-                        </ul>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span>Selected: </span>
+            <nav class="navbar bg-body-tertiary fixed-left">
+                <div class="container-fluid">
+                    <h2 class="navbar-brand">Filters</h2>
+                    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Filters</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Link</a>
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <form class="d-flex mt-3" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-    
-            <div class="container px-3 pt-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Filter by Price</h4>
-                    </div>
-    
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="priceCheck" id="priceCheck">
-                                <label class="form-check-label" for="priceCheck">
-                                    Default checkbox
-                                </label>
-                            </div>
-                        </ul>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span>Selected: </span>
-                    </div>
-                </div>
-            </div>
+            </nav>
         </div>
     
         <div class="col-9">
@@ -98,7 +73,6 @@
                 </nav>
 
                 <a href="functions/addProduct.php" class="btn btn-primary">Add Product</a>
-                <a href="functions/deleteProduct.php" class="btn btn-danger">Delete Product</a>
     
                 <div class="container border rounded-3 mt-2">
                     <div class="row p-3">
@@ -115,10 +89,21 @@
                                     }
                                 }
                                 ?>
-                                <div class="card ms-2" style="width: 18rem;">
-                                    <img src="<?= $product['img'] ?>" class="card-img-top">
-
+                                <div class="card ms-2 mt-sm-2 mt-2" style="width: 18rem;">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a href="../functions/editProduct.php?uid=<?= $product['id'] ?>" class="btn btn-sm btn-warning">Update Product</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <a href="../functions/deleteProduct.php?did=<?= $product['id'] ?>" class="btn btn-sm btn-danger">Delete Product</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="card-body">
+                                        <img src="<?= $product['img'] ?>" class="card-img-top" height="280" width="150">
+
                                         <h5 class="card-title"><?= $brandName; ?> - <?= $product['title']; ?></h5>
 
                                         <p class="card-text">$<?= $product['price']; ?></p>
